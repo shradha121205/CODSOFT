@@ -1,0 +1,159 @@
+1.Number Guessing Game:
+#include <iostream>
+#include <cstdlib>   
+#include <ctime>     
+using namespace std;
+int main() {
+    srand(time(0));
+    int secretNumber = rand() % 100 + 1; 
+    int guess;
+    int attempts = 0;
+    cout << "Welcome to the Number Guessing Game!" << endl;
+    cout << "I have picked a number between 1 and 100. Can you guess it?" << endl;
+    do {
+        cout << "Enter your guess: ";
+        cin >> guess;
+        attempts++;
+
+        if (guess > secretNumber) {
+            cout << "Too high! Try again." << endl;
+        } else if (guess < secretNumber) {
+            cout << "Too low! Try again." << endl;
+        } else {
+            cout << "Congratulations! You guessed the number " << secretNumber << " correctly in " << attempts << " attempts." << endl;
+        }
+    } while (guess != secretNumber);
+
+    return 0;
+}
+
+
+
+
+
+2.Simple calculator:
+using namespace std;
+int main(){
+int a,b;
+char ch;
+cout<<"Enter the two numbers:";
+cin>>a>>b;
+cout<<"Enter the desired operation:";
+cin>>ch;
+if(ch=='+'){
+    cout<<"The sum of "<<a<<" and "<<b<<" is "<<a+b;
+}
+else if(ch=='-'){
+    cout<<"The difference of "<<a<<" and "<<b<<" is "<<a-b;
+}
+else if(ch=='*'){
+    cout<<"The product of "<<a<<" and "<<b<<" is "<<a*b;
+}
+else{
+    cout<<"The division of "<<a<<" and "<<b<<" is "<<a/b;
+}
+return 0;
+}
+
+3.Tic-Tac-Toe Game:
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+void displayBoard(const vector<vector<char>> &board) {
+    cout << "-------------" << endl;
+    for (int i = 0; i < 3; ++i) {
+        cout << "| ";
+        for (int j = 0; j < 3; ++j) {
+            cout << board[i][j] << " | ";
+        }
+        cout << endl << "-------------" << endl;
+    }
+}
+
+bool checkWin(const vector<vector<char>> &board, char player) {
+    for (int i = 0; i < 3; ++i) {
+        if (board[i][0] == player && board[i][1] == player && board[i][2] == player) return true;
+        if (board[0][i] == player && board[1][i] == player && board[2][i] == player) return true;
+    }
+    if (board[0][0] == player && board[1][1] == player && board[2][2] == player) return true;
+    if (board[0][2] == player && board[1][1] == player && board[2][0] == player) return true;
+    return false;
+}
+
+bool checkDraw(const vector<vector<char>> &board) {
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 3; ++j) {
+            if (board[i][j] == ' ') return false;
+        }
+    }
+    return true;
+}
+
+int main() {
+    vector<vector<char>> board(3, vector<char>(3, ' ')); // Initialize the board with empty spaces
+    char currentPlayer = 'X';
+
+    bool gameOver = false;
+    while (!gameOver) {
+        displayBoard(board);
+
+        int row, col;
+        cout << "Player " << currentPlayer << ", enter your move (row and column): ";
+        cin >> row >> col;
+        if (row < 1 || row > 3 || col < 1 || col > 3 || board[row - 1][col - 1] != ' ') {
+            cout << "Invalid move! Try again." << endl;
+            continue;
+        }
+        board[row - 1][col - 1] = currentPlayer;
+        if (checkWin(board, currentPlayer)) {
+            displayBoard(board);
+            cout << "Player " << currentPlayer << " wins!" << endl;
+            gameOver = true;
+        } else if (checkDraw(board)) { // Check for a draw
+            displayBoard(board);
+            cout << "It's a draw!" << endl;
+            gameOver = true;
+        } else { 
+            currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+        }
+    }
+
+
+
+
+4.To-do list:
+#include <iostream>
+#include <string>
+using namespace std;
+const int MAX_TASKS = 10;
+
+struct ToDoList {
+   string tasks[MAX_TASKS];
+    int count = 0;
+
+    void addTask(const string &task) {
+        if (count < MAX_TASKS) {
+            tasks[count++] = task;
+           cout << "Task added successfully.\n";
+        } else {
+           cout << "Todo list is full. Cannot add more tasks.\n";
+        }
+    }
+
+    void viewTasks() {
+        if (count == 0) {
+           cout << "No tasks in the list.\n";
+        } else {
+           cout << "Tasks in the list:\n";
+            for (int i = 0; i < count; ++i) {
+           cout << i + 1 << ". " << tasks[i] << "\n";
+            }
+        }
+    }
+
+
+
+
